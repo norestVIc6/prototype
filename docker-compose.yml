@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  ai:
+    build:
+      context: ./nor3st_AI
+    container_name: norest_ai
+    ports:
+      - 3030:80
+    volumes:
+     - ./nor3st_AI:/app
+    command: flask run --host 0.0.0.0 --port 80
+    working_dir: /app
+    tty: true
+
+  front:
+    build: 
+      context: ./nor3st-frontend
+    container_name: norest_front
+    ports:
+      - 3000:3000
+    command: npm start
+    working_dir: /app
+    volumes:
+      - ./nor3st-frontend:/app
