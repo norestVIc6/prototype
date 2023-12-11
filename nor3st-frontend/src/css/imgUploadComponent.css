@@ -1,0 +1,25 @@
+.blackmodal{
+    position: absolute;
+    z-index: 130;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #888b9a;
+    opacity: 0.9;
+}
+
+.whitemodal{
+    background-color: rgb(228 228 228);
+    width: 50%;
+    z-index: 190;
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    text-align: center;
+    height: 60%;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

@@ -1,0 +1,233 @@
+.educationContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.educationbg{
+    background-image: url(../img/MainBannerV5.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 90%;
+    position: absolute;
+}
+
+.educationMain{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #8597ad;
+    opacity: .8;
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 102;
+}
+.educationMain_left{
+    position: absolute;
+    z-index: 103;
+    width: 20%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.educationMain_left h3{
+    font-size: 3em;
+    font-family: 'Wfont';
+    height: 15%;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.educationMain_left ul{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.educationMain_left ul li{
+    width: 100%;
+    height: 13%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+.educationMain_left ul li i{
+    background-image: url(../img/home.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 16%;
+    height: 60%;
+}
+.educationMain_right{
+    width: 78%;
+    background-color: #4d5d73;
+    position: absolute;
+    z-index: 103;
+    right: 2%;
+    height: 90%;
+    border-radius: 1.5em;
+    display: flex;
+    justify-content: center;
+    opacity: 0.9;
+}
+.educationMain_right>div{
+    border-radius: 1.5em;
+    width: 98%;
+    height: 100%;
+    background: #8597ad;
+}
+.educationMain_top{
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.educationMain_top>ul{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: space-around;
+    list-style: none;
+}
+.educationMain_top>ul>li:nth-child(1){
+    font-size: 1.5em;
+    font-family: 'Wfont';
+    color: white;
+    letter-spacing: 0.1em;
+    line-height: 2em;
+}
+.educationMain_top>ul>li:nth-child(2){
+    display: flex;
+    height: 16%;
+}
+.educationMain_top>ul li:nth-child(2) ul{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.educationMain_top>ul li:nth-child(2) ul li:nth-child(1){
+    width: 80%;
+    border: 1px solid;
+    border-radius: 5em;
+    overflow: hidden;
+}
+.educationMain_top>ul li:nth-child(2) ul li:nth-child(2){
+    width: 10%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.gauge{
+    background-color: #26263F;
+    height: 100%;
+    transition: 1.2s;
+}
+.educationMain_top>ul li:nth-child(2) ul li:nth-child(2) button{
+    height: 100%;
+}
+.educationMain_bottom{
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    background: #2f4871;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-right-radius: 1.5em;
+    border-bottom-left-radius: 1.5em;
+}
+.educationMain_bottom>div:nth-child(1){
+    width: 90%;
+    height: 35%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.circlegraph{
+    width: 12%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.circlegraph>div{
+    width: 100%;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+.circlegraph svg{
+    width: 80%;
+    height: 75%;
+}
+.educationMain_bottom>div:nth-child(1)>div:nth-child(2){
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.educationMain_bottom>div:nth-child(1)>div:nth-child(2) ul{
+    width: 90%;
+    list-style: none;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #606880;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: white;
+}
+.btnAudio{
+    width: 40%;
+    height: 20%;
+    display: flex;
+}
+.educationMain_bottom>div:nth-child(1)>div:nth-child(2) ul li{
+    height: 40%;
+}
+.educationMain_bottom>div:nth-child(1)>div:nth-child(2) ul li:nth-child(2){
+    height: 30%;
+}
+.educationMain_bottom>div:nth-child(1)>div:nth-child(2) button{
+    width: 50%;
+    height: 100%;
+    background: black;
+    color: wheat;
+}
+.educationMain_bottom>div:nth-child(2){
+    width: 90%;
+    height: 60%;
+    border: 1px solid;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+}
+
+canvas{
+    position: absolute;
+    width: 88%;
+    height: 35%;
+    
+}
+canvas:nth-child(1){
+    opacity: 0.6;
+}

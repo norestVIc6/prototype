@@ -1,0 +1,58 @@
+.container{
+    width: 100%;
+    height: 84%;
+}
+
+.banner{
+    background-image: url(../img/MainBannerV5.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 84%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    opacity: 0.7;
+}
+.banner_h1{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    font-size: 3.6em;
+    font-weight: 600;
+    font-family: "Wfont";
+}
+
+.banner_myClass{
+    width: 100%;
+    height: 48%;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    font-size: 1.5em;
+    color: #3b5378;
+    font-weight: 900;
+}
+
+.banner_myClass_btn{
+    border: 2px solid #52525b;
+    border-radius: 0.2em;
+    padding: 15px 15px
+}
+
+.bluebg{
+    background: #6e7e94;
+    width: 100%;
+    height: 84%;
+    position: fixed;
+    opacity: 0.7;
+}
+
+.bannercontents{
+    width: 100%;
+    height: 84%;
+    position: fixed;
+}

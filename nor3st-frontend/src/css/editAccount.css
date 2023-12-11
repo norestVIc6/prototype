@@ -1,0 +1,145 @@
+.blackModalv2{
+    position: absolute;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #888b9a;
+    opacity: 0.9;
+}
+
+.editprofile{
+    position: absolute;
+    width: 34%;
+    height: 70%;
+    z-index: 201;
+    background-color: #9ca1bc;
+    left: 33%;
+    top: 11%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.editprofileheader{
+    width: 100%;
+    height: 24%;
+    display: flex;
+    align-items: center;
+}
+.editprofileheader ul{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.editprofileheader ul li:nth-child(1){
+    width: 40%;
+    text-align: center;
+    /* background-color: #4f8fba; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    font-family: 'Wfont';
+    color: #d7d7d8;
+}
+
+.editprofileheader ul li:nth-child(2){
+    width: 40%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    font-size: 1.5em;
+    font-family: 'Wfont';
+    color: #7caaca;
+    margin-top: 5em;
+}
+
+.editprofilebody{
+    width: 100%;
+    height: 70%;
+}
+.editprofilebody>div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.editprofilebody_left{
+    display: flex;
+    width: 45%;
+    height: 100%;
+}
+.editprofilebody_left>div{
+    width: 100%;
+    height: 84%;
+    border: 5px solid #7d83a4;
+}
+.editprofilebody_left ul{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.editprofilebody_left ul li:nth-child(1){    
+    width: 98%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.editprofilebody_left ul li:nth-child(2){
+    width: 100%;
+    height: 15%;
+}
+.editprofilebody_left ul li:nth-child(2) input{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 2px solid #3b5378;
+    background-color: #cecee1;
+    height: 100%;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.editprofilebody_right{
+    display: flex;
+    width: 45%;
+    height: 75%;
+    justify-content: center;
+    align-items: center;
+}
+
+.editprofilebody_right ul{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 75%;
+}
+
+.editprofilebody_right ul li{
+    width: 90%;
+    height: 25%;
+    border: 3px solid #cdc8bf;
+    overflow: hidden;
+}
+.editprofilebody_right ul li input{
+    width: 99%;
+    border: none;
+    height: 100%;
+    padding-left: 0.8em;
+    font-size: 1.2em;
+}
+.editprofilebody_right ul li input:focus-visible{
+    border: none;
+    outline: none;
+}
+
+

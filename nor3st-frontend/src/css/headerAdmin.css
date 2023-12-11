@@ -1,0 +1,17 @@
+.adminheader li a{
+    color:#878cab;
+    font-family: 'Wfont';
+}
+.w30r{
+    width:30%;
+}
+.logoAdmin{
+    width: 10%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Wfont';
+    color: white;
+    letter-spacing: 0.1em;
+}

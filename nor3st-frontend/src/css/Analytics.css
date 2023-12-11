@@ -1,0 +1,166 @@
+.AnalyticsContainer{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AnalyticsMain{
+    width: 95%;
+    height: 95%;
+    overflow-y: scroll;
+}
+.AnalyticsMain>div{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+}
+.AnalyticsMain>div>h3{
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.AnalyticsMain>div>div{
+    height: 42vh;
+    display: flex;
+    background: linear-gradient(#2b2b7e,#454583,#67678e);
+    align-items: center;
+    justify-content: space-between;
+}
+.Daily_Analytics>div>ul{
+    width: 60%;
+    height: 90%;
+}
+.Daily_Analytics>div>ul>li{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+.Daily_Analytics>div>ul>li>ul{
+    width: 60%;
+    margin-left: 1em;
+}
+.Daily_Analytics>div>ul>li>ul>li:nth-child(1){
+    height: 20%;
+    font-size: 1em;
+    color: white;
+}
+.Daily_Analytics>div>ul>li>ul>li:nth-child(2){
+    height: 76%;
+    font-size: 1.3em;
+    color: white;
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    width: 47%;
+    padding-left: 3.5vw;
+}
+.Daily_Analytics>div>ul>li:nth-child(2)>ul>li:nth-child(2){
+    border: none;
+}
+.Daily_Analytics>div>div{
+    display: flex;
+    width: 40%;
+    height: 80%;
+}
+.Daily_Analytics>div>div p{
+    width: 23%;
+    color: white;
+}
+.Daily_Analytics>div>div svg{
+    width: 50%;
+    height: 100%;
+}
+
+.Weekly_Analytics>div>ul{
+    width: 60%;
+    height: 90%;
+}
+.Weekly_Analytics>div>ul>li{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+.Weekly_Analytics>div>ul>li>ul{
+    width: 60%;
+    margin-left: 1em;
+}
+.Weekly_Analytics>div>ul>li>ul>li:nth-child(1){
+    height: 20%;
+    font-size: 1em;
+    color: white;
+}
+.Weekly_Analytics>div>ul>li>ul>li:nth-child(2){
+    height: 76%;
+    font-size: 1.3em;
+    color: white;
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    width: 47%;
+    padding-left: 3.5vw;
+}
+.Weekly_Analytics>div>ul>li:nth-child(2)>ul>li:nth-child(2){
+    border: none;
+}
+.Weekly_Analytics>div>div:nth-child(2){
+    display: flex;
+    width: 40%;
+    height: 80%;
+}
+.Weekly_Analytics>div>div:nth-child(2) p{
+    width: 23%;
+    color: white;
+}
+.Weekly_Analytics>div>div:nth-child(2) svg{
+    width: 50%;
+    height: 100%;
+}
+
+
+.Monthly_Analytics>div>ul{
+    width: 60%;
+    height: 90%;
+}
+.Monthly_Analytics>div>ul>li{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+.Monthly_Analytics>div>ul>li>ul{
+    width: 60%;
+    margin-left: 1em;
+}
+.Monthly_Analytics>div>ul>li>ul>li:nth-child(1){
+    height: 20%;
+    font-size: 1em;
+    color: white;
+}
+.Monthly_Analytics>div>ul>li>ul>li:nth-child(2){
+    height: 76%;
+    font-size: 1.3em;
+    color: white;
+    border-bottom: 1px solid white;
+    display: flex;
+    align-items: center;
+    width: 47%;
+    padding-left: 3.5vw;
+}
+.Monthly_Analytics>div>ul>li:nth-child(2)>ul>li:nth-child(2){
+    border: none;
+}
+.Monthly_Analytics>div>div{
+    display: flex;
+    width: 40%;
+    height: 80%;
+}
+.Monthly_Analytics>div>div p{
+    width: 23%;
+    color: white;
+}
+.Monthly_Analytics>div>div svg{
+    width: 50%;
+    height: 100%;
+}

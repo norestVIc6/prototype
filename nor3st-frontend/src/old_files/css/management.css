@@ -1,0 +1,115 @@
+.Managercontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    flex-direction: column;
+}
+.Managercontainer .search{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10%;
+    width: 86%;
+}
+.Managercontainer .search input{
+    width: 20%;
+    height: 54%;
+}
+.Managercontainer .search button{
+    position: absolute;
+    height: 5%;
+    width: 4%;
+    background: #3b5378;
+    color: white;
+    border: none;
+}
+.Managercontainer .team{
+    display: flex;
+    width: 86%;
+    justify-content: end;
+    height: 10%;
+    align-items: center;
+}
+.Managercontainer .team>ul{
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    text-align: center;
+    height: 50%;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.Managercontainer .team>ul li{
+    width: 23%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8e94b5;
+    color: #000000;
+}
+.Managercontainer .team>ul li:nth-child(1){
+    background: #5b607b;
+    color: #c4c7da;
+}
+.Managercontainer .detail{
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    width: 86%;
+    justify-content: space-between;
+}
+.Managercontainer .detail>div{
+    height: 33%;
+    background: #a7abc6;
+    border-radius: 0.5em;
+}
+.Managercontainer .detail>div>ul{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.Managercontainer .detail>div>ul>li:nth-child(1){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Managercontainer .detail>div>ul>li:nth-child(1) p{
+    width: 79%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10em;
+    background: #d9d9d9;
+}
+.Managercontainer .detail>div>ul>li:nth-child(2){
+    width: 83%;
+    display: flex;
+    align-items: center;
+}
+.Managercontainer .detail>div>ul>li:nth-child(2)>ul{
+    height: 78%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    font-weight: 600;
+    justify-content: space-evenly;
+}
+.Managercontainer .detail>div>ul>li:nth-child(2)>ul li{
+    height: 23%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.Managercontainer .page{
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

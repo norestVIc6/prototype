@@ -1,0 +1,17 @@
+pydub
+flask-cors
+openai
+librosa
+boto
+flask
+openai-whisper
+gTTS
+# aiohttp
+# yarl
+# frozenlist
+pydub
+chromadb
+langchain
+pypdf
+pymupdf
+python-dotenv

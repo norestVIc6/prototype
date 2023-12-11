@@ -1,0 +1,110 @@
+.MembersModifyContainer{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.MembersModifyMain{
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.MembersModifyMain_head{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    height: 15%
+}
+.MembersModifyMain_head h3{
+    font-size: 2vw;
+    font-weight: bold;
+    color: #3b5378;
+}
+.MembersModifyMain_head button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6vw;
+    height: 5vh;
+    background: #3b5378;
+    color: white;
+    border-radius: 1em;
+    border-style: none;
+}
+.MembersModifyMain_body{
+    height: 85%;
+}
+.MembersModifyMain_body>ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.MembersModifyMain_body_info{
+    height: 55%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.MembersModifyMain_body_info>h3{
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #3b5378;
+    width: 96%;
+}
+.MembersModifyMain_body_info>ul{
+    width: 93%;
+    height: 85%;
+    font-size: 1.1em;
+    
+}
+.MembersModifyMain_body_info>ul li{
+    height: 16%;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    color: #3b5378;
+}
+.MembersModifyMain_body_info>ul li label{
+    width: 40%;
+}
+.MembersModifyMain_body_info>ul li input{
+    width: 60%;
+    height: 60%;
+    border-radius: 0.4em;
+    border-width: 1px;
+    border-color: #97a3b7;
+    background: #f3f4f6;
+}
+.MembersModifyMain_body_evaluation{
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.MembersModifyMain_body_evaluation h3{
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #3b5378;
+    width: 96%;
+}
+.MembersModifyMain_body_evaluation>div{
+    width: 96%;
+    height: 74%;
+}
+.MembersModifyMain_body_evaluation textarea{
+    width: 60%;
+    height: 100%;
+    resize: none;
+    border-radius: 0.4em;
+    border-width: 1px;
+    border-color: #97a3b7;
+    background: #f3f4f6;
+}

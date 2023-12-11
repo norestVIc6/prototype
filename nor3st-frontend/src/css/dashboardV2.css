@@ -1,0 +1,17 @@
+.dashboardContainerV2{
+    width: 85%;
+}
+.dashboardContainerV2_top{
+    height: 10%;
+    background-color: #eeeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dashboardContainerV2_top h2{
+    width: 95%;
+    font-size: 1.4em;
+    color: black;
+    font-family: 'Wfont';
+    letter-spacing: 0.05vw;
+}

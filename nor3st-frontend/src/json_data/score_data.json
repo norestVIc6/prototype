@@ -1,0 +1,10 @@
+{
+    "scores":
+    [{
+        "user_id" : 1,
+        "day" : 1,
+        "listening_total_score": 0,
+        "speaking_total_score": 0,
+        "simulation_total_score": 0
+    }]
+}
