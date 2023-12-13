@@ -152,20 +152,23 @@
     display: flex;
 }
 .ListenQ{
-    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
-.ListenQ b{
+.ListenQuestionBox {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.ListenQ .ListenKorean{
     font-size: 2.0em;
     font-weight: bold;
     color: white;
     width: 97%;
-    height: 21%;
     align-items: end;
     display: flex;
+    word-break: keep-all;
 }
 .ListenQ ul{
     display: flex;
@@ -179,17 +182,21 @@
     line-height: 3em;
     font-weight: bold;
     color: white;
+    cursor: pointer;
 }
 .ListenV{
     width: 30%;
-    height: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
+}
+.ListenAnswerBox{
+    margin-top: 4%;
 }
 .ListenV button{
-    width: 50%;
-    height: 50%;
+    width: 150px;
+    height: 50px;
     background-color: black;
     color: white;
     font-family: 'Wfont';
