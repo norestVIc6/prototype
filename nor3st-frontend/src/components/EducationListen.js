@@ -10,6 +10,7 @@ import getBlobDuration from 'get-blob-duration'
 import '../css/educationListen.css';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import lecture from '../json_data/question.json'
+import Cookies from 'js-cookie';
 
 function EducationV2() {
     const usenavigate = useNavigate();
@@ -80,12 +81,19 @@ function EducationV2() {
           turnWhite(e)
       }, 300); 
     }
+
+    //점수 저장
+    const saveScore = () => [
+        Cookies.set("listening_total_score", totalGrade)
+    ]
+
     const nextButton = (e) => {
         if(currentGauge < maxGauge && currentStep < allQuestion.length - 1){
             setCurrentGauge(currentGauge + gaugeUnit);
             setCurrentStep(currentStep + 1)
         }else{
             window.location.href = "/profile"
+            saveScore()
         }
     }
     

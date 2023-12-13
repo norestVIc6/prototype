@@ -7,6 +7,9 @@ import EditAccount from "./EditAccount";
 import userData from '../json_data/users.json'
 import scoreData from '../json_data/score_data.json'
 
+import Cookies from 'js-cookie';
+
+
 function Profile() {
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const usernameRef = useRef();
@@ -29,10 +32,7 @@ function Profile() {
         let user = getUser(1)
         usernameRef.current.innerHTML = user.user_name
         departmentRef.current.innerHTML = user.department
-        let score = getCurrentScore(1)
-        setListeningScore(score.listening_total_score)
-        setSpeakingScore(score.speaking_total_score)
-        setSimulationScore(score.simulation_total_score)
+        updateScore();
     }, []);
 
     // const getMemberInfo = async () => {
@@ -53,6 +53,16 @@ function Profile() {
     const getCurrentScore = (user_id) =>{
         const scores = JSON.parse(JSON.stringify(scoreData)).scores;
         return scores.find(score => score.user_id === user_id) || null
+    }
+
+    const updateScore = () => {
+        const listen_score = Cookies.get("listening_total_score") || 0
+        const speaking_score = Cookies.get("speaking_total_score") || 0
+        const simulation_score = Cookies.get("simulation_total_score") || 0
+
+        setListeningScore(Number(listen_score))
+        setSpeakingScore(Number(speaking_score))
+        setSimulationScore(Number(simulation_score))
     }
 
     return (
@@ -127,7 +137,7 @@ function Profile() {
                                                     color: "#70cfeb",
                                                 },
                                             ]}
-                                                reveal={listeningScore} //퍼센트
+                                                reveal={listeningScore}  //퍼센트
                                                 lineWidth={21}
                                                 background="#f3f3f3"
                                                 lengthAngle={360}
