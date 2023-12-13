@@ -126,7 +126,7 @@ function EducationV2() {
         e.target.style.color = "blue"
     }
     const playSound = () => {
-        const audio = audioRef.current;
+        const audio = new Audio(audioPath)
         if(audio){
             audio.play()
         }
@@ -171,7 +171,7 @@ function EducationV2() {
                                       <div className='ListenV'>
                                         <button onClick={playSound}>Questions Voice</button>
                                         <audio id="my-audio" ref={audioRef}>
-                                          <source src={audioPath} type="audio/mp3" />
+                                          <source type="audio/mp3" />
                                         </audio>
                                       </div>
                                   </div>
