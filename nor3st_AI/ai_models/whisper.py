@@ -6,6 +6,6 @@ class Whisper(object):
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(Whisper, cls).__new__(cls)
-            cls._instance.MODEL = whisper.load_model("tiny")
+            cls._instance.MODEL = whisper.load_model("small")
             
         return cls._instance
