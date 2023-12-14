@@ -82,11 +82,6 @@ function EducationV2() {
       }, 300); 
     }
 
-    //점수 저장
-    const saveScore = () => [
-        Cookies.set("listening_total_score", totalGrade)
-    ]
-
     const nextButton = (e) => {
         if(currentGauge < maxGauge && currentStep < allQuestion.length - 1){
             setCurrentGauge(currentGauge + gaugeUnit);
@@ -96,6 +91,11 @@ function EducationV2() {
             saveScore()
         }
     }
+
+    //점수 저장
+    const saveScore = () => [
+        Cookies.set("listening_total_score", totalGrade)
+    ]
     
     const shuffleAnswer = () => {
         let answers = allQuestion.map(e => e.viet);

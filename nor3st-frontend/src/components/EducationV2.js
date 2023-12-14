@@ -10,6 +10,9 @@ import getBlobDuration from 'get-blob-duration'
 import '../css/educationV2.css';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import lecture from '../json_data/question.json'
+import { serverIp } from '../apis/IPconfig';
+import Cookies from 'js-cookie';
+
 
 function EducationV2() {
     const  { 
@@ -27,22 +30,59 @@ function EducationV2() {
         const [compareData, setCompareData] = useState(null);
         const [similarity, setSimilarity] = useState(0);
         const [isAudioPlay, setIsAudioPlay] = useState(false);
-        const [vietContents,setVietContents] = useState(null);
-        const [koreanContent,setKoreanContent] = useState(null);
-        const [id,setID] = useState(null);
+        const [viet,setViet] = useState("");
+        const [korean,setKorean] = useState("");
+
         let audio;
         const [saveAudio,setSaveAudio] = useState(new Audio());
         const [currentStep, setCurrentStep] = useState(0);
+        const [allQuestion, setAllQuestion] = useState([]);
+
+        const [gaugeUnit, setGaugeUnit] = useState(0)
+        const [gradeUnit, setGradeUnit] = useState(0)
+        const [currentGauge, setCurrentGauge] = useState(0)
+        const [maxGauge, ] = useState(100)
+
+        const [currentStepScore, setCurrentStepScore ] = useState(0)
+        const [totalGrade, setTotalGrade ] = useState(0);
+
+        const init = () => {
+            const questions = getQuestions()
+            const gaugeInit = Number(100 / questions.length);
+            setGaugeUnit(gaugeInit);
+            setGradeUnit(gaugeInit); //gauge 와 동일하게 증가해야함
+            setCurrentGauge(gaugeInit);
+        }
+
+        useEffect(()=>{
+            init()
+        }, [])
+
+        const prevButton = (e) => {
+            if(currentGauge > 0){
+                setCurrentGauge(currentGauge - gaugeUnit);
+                setCurrentStep(currentStep - 1)
+            }
+        }
+
+        const nextButton = (e) => {
+            if(currentGauge < maxGauge && currentStep < allQuestion.length - 1){
+                setCurrentGauge(currentGauge + gaugeUnit);
+                setCurrentStep(currentStep + 1)
+            }else{
+                window.location.href = "/profile"
+            }
+        }
 
 
         const getQuestions = () => {
             const questions = JSON.parse(JSON.stringify(lecture)).questions;
             return questions
         }
-        const get_mp3_file_to_blob = async (currentStep) =>{
+        const get_mp3_file_to_blob = async (filepath) =>{
 
                 // Fetch the MP3 file
-                const response = await fetch(`/${currentStep}`);
+                const response = await fetch(`${filepath}`);
                 // Convert the response to ArrayBuffer
                 const musicArrayBuffer = await response.arrayBuffer();
                 console.log(musicArrayBuffer)
@@ -93,123 +133,54 @@ function EducationV2() {
 
 
         useEffect(() => {       
-            // const data =  async() =>{
-            //     const data = await getMyDailyTasks();
-
-            //     setVietContents(data.data[4].vietContent);
-            //     setKoreanContent(data.data[4].koreanContent)
-            //     setID(data.data[4].solvedId)       
-            //     const url = await getMyDailyAudio(data.data[4].audioUrl)
-            //     setAudioBlob(url);
-
-            // }
-            // data();
             const data = async (currentStep) =>{
                 const questions = getQuestions()
+                setAllQuestion([...questions])
                 const currentBlob =  await get_mp3_file_to_blob(questions[currentStep].file_path)
-                setKoreanContent(questions[currentStep].speaking_sentence)
-                setVietContents(questions[currentStep].viet)
-                setID(questions[currentStep].question_id)
+                setKorean(questions[currentStep].speaking_sentence)
+                setViet(questions[currentStep].viet)
                 setAudioBlob(currentBlob)
             }
             data(currentStep)
         },[currentStep])
 
-        const [gauge, setGauge] = useState(20);
-        const gaugerHandle = (event) =>{
-            console.log(event)
-            if(event.target.innerText === 'prev'){
-                if(gauge > 20){
-                    setGauge(gauge-20)
-                    setCurrentStep(currentStep-1)
-                    setSimilarity(0)
-                    setBlob()
-                    
-                }
-                
-            }else if(event.target.innerText === 'next'){
-                if(gauge < 100){
-                    setGauge(gauge+20)
-                    setCurrentStep(currentStep+1)
-                    setSimilarity(0)
-                    setBlob()
-                }
-            }
-        }
-
         useEffect(() => {
             setBlob(recordingBlob);
             // compareBlobs();
-            saveRecording();
+            getPronounce();
             if ( ! recordingBlob ){
                 
                 return  
             } ;
         },[ recordingBlob ])
 
-        const saveRecording = async () => {
-            if (recordingBlob) {
-                const audioBlob = new Blob([recordingBlob], { type: 'audio/mp3' });                
-                // const audioBlob = new File([recordingBlob],"file", { type: 'audio/mpeg' });
-                // console.log(audioBlob);              
-                // const downloadLink = document.createElement('a');
-                // downloadLink.href = window.URL.createObjectURL(audioBlob);
-                // downloadLink.download = 'recorded_audio.wav';
-                // downloadLink.click();
-                const response = await sendRecord(id,audioBlob, koreanContent)
+    const getPronounce = async () =>{
+        if (recordingBlob) {
+            const formData = new FormData();
+            const recordedBlob = new Blob([recordingBlob], { type: 'audio/mp3' }); 
+            formData.append("voice", recordedBlob, "voice");
 
-                console.log(response);
-
-                setSimilarity(response);
+            const getScoreFromAIServer = await fetch(`${serverIp}/get_pronounce`,
+                                    {   
+                                        method: 'POST',
+                                        body: formData,
+                                    })
+            if (getScoreFromAIServer.ok) {
+                const jsonResponse = await getScoreFromAIServer.json();
+                console.log(jsonResponse);
+            } else {
+                console.error('Failed to fetch data from the server:', getScoreFromAIServer.status);
             }
-        }
-
-        const compareBlobs = () => {
-            if (audioBlob && recordingBlob) {
-                calculateBlobSimilarity(audioBlob, recordingBlob)
-                .then((result) => {
-                    setSimilarity(result*1000);
-                })
-                .catch((error) => {
-                    console.error('오류 발생:', error);
-                });
-            }
-        };
-
-    const calculateBlobSimilarity = (blob1, blob2) => {
-        return new Promise((resolve, reject) => {
-            const reader1 = new FileReader();
-            const reader2 = new FileReader();
-        reader1.onload = (e) => {
-            const data1 = new Uint8Array(e.target.result);
-            reader2.onload = (e) => {
-                const data2 = new Uint8Array(e.target.result);
-                const similarity = calculateByteArraySimilarity(data1, data2);
-                resolve(similarity);
-            };
-            reader2.readAsArrayBuffer(blob2);
-        };
-        reader1.readAsArrayBuffer(blob1);
-        });
-    };
-
-    const calculateByteArraySimilarity = (arr1, arr2) => {
-    // if (arr1.length !== arr2.length) {
-    //     throw new Error('배열 길이가 다릅니다.');
-    // }
-
-    let diffCount = 0;
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) {
-        diffCount++;
+            
         }
     }
 
-    const totalBytes = arr1.length;
-    const similarityNumber= 1 - diffCount / totalBytes;
-    console.log(similarityNumber);
-    return similarityNumber.toFixed(3);
-    };
+    const saveTotalScore = () =>{
+
+    }
+
+
+
     return (
         <div className='educationContainer'>
             <div className='educationbg'></div>
@@ -234,8 +205,8 @@ function EducationV2() {
                                 <li>The Best way to improve your<br/>Korean</li>
                                 <li>
                                     <ul>
-                                        <li><div className='gauge' style={{width : gauge+"%" }}></div></li>
-                                        <li><button onClick={gaugerHandle}>prev</button><button onClick={gaugerHandle}>next</button></li>
+                                        <li><div className='gauge' style={{width : currentGauge+"%" }}></div></li>
+                                        <li>{/*<button onClick={prevButton}>prev</button>*/}<button onClick={nextButton}>next</button></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -248,11 +219,11 @@ function EducationV2() {
                                     </div>
                                     <PieChart data={[
                                         {
-                                            value : similarity,
+                                            value : currentStepScore,
                                             color : "#3568b7",
                                         },
                                     ]}
-                                    reveal = { similarity } //퍼센트
+                                    reveal = { currentStepScore } //퍼센트
                                     lineWidth ={28}
                                     background = "#f3f3f3"
                                     lengthAngle = {360}
@@ -270,8 +241,8 @@ function EducationV2() {
                                 </div>
                                 <div>
                                     <ul>
-                                        <li >{koreanContent}</li>
-                                        <li>({vietContents})</li>
+                                        <li >{korean}</li>
+                                        <li>({viet})</li>
                                     </ul>
                                     <div className='btnAudio'>
                                         {!isAudioPlay ? <button onClick={playBlob}>Start Playing</button> : <button onClick={playBlob}>Pause Playing</button>}
