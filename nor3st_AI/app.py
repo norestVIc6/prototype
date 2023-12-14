@@ -66,6 +66,28 @@ def save_sentences_with_voice():
 #     except Exception as e:
 #         return jsonify({"error": str(e)})
 
+@app.route("/get_pronounce", methods=["POST"])
+def get_prononuce():
+    voice = request.files["voice"]
+    
+    if voice is None:
+        return '파일이 존재하지 않습니다.'
+    else:  # 파일 있는 경우 
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], voice.filename)
+        audio = AudioSegment.from_file(voice).export(file_path+".mp3", format="mp3")
+        
+        with Education(request, voice_path=file_path, url="text") as result:
+            transcribed_text = result["answer"]
+
+        result = {"answer": transcribed_text}
+
+        return jsonify(result) 
+    
+    
+    
+    
+    
+
 @app.route("/get_score", methods=["POST"])
 def make_score():
     
