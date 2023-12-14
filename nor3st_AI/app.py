@@ -75,7 +75,6 @@ def get_prononuce():
     else:  # 파일 있는 경우 
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], voice.filename) + ".mp3"
         audio = AudioSegment.from_file(voice).export(file_path, format="mp3")
-        
         with Education(request, voice_path=file_path, url="text") as result:
             transcribed_text = result["answer"]
 
@@ -217,30 +216,23 @@ def simulation_text():
     try:
         voice = request.files["voice"]
         if voice:
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], "simulation_test.mp3")
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'simulation_test.mp3')
             audio = AudioSegment.from_file(voice).export(file_path, format="mp3")
 
-        with Simulation(request=request) as simulation:
-            return simulation
+            with Simulation(request=request, voice_path=file_path) as simulation:
+                return simulation
 
     except Exception as e:
         return jsonify({"error": str(e)})
 
 #정답(String)과 제출 오디오(Audio) request 시 맥락에 맞는지 판단 후 return(boolean) 기능
+#20231214 는 질문과 오디오 맥락에 맞는지 판단
 @app.route("/simualtion/check_answer", methods=["POST"])
 def simulation_check_answer():
-    user_id = request.form["user_id"]
     answer_voice = request.files["voice"]
-
-    user_id_directory = os.path.join(app.config['UPLOAD_FOLDER'], "user", user_id)
-    if not os.path.exists(user_id_directory):
-        os.makedirs(user_id_directory)
     
-    voice_id = str(uuid.uuid1())
-
-
     if answer_voice:
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'],"user", user_id, voice_id)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], answer_voice.filename+'.mp3')
         audio = AudioSegment.from_file(answer_voice).export(file_path, format="mp3")
 
         with Simulation(request=request, voice_path=file_path) as result:

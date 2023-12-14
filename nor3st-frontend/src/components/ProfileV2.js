@@ -50,9 +50,8 @@ function Profile() {
         window.location.href = '/listen';
     }
 
-    const getCurrentScore = (user_id) =>{
-        const scores = JSON.parse(JSON.stringify(scoreData)).scores;
-        return scores.find(score => score.user_id === user_id) || null
+    const SimulationPageHandler = () => {
+        window.location.href = '/simulation'
     }
 
     const updateScore = () => {
@@ -157,7 +156,7 @@ function Profile() {
                                 </li>
                                 <li>
                                     <ul>
-                                        <li>Simulation<i>&gt;</i></li>
+                                        <li onClick={SimulationPageHandler}>Simulation<i>&gt;</i></li>
                                         <li>
                                             <p>Progress</p>
                                             <PieChart data={[

@@ -28,7 +28,6 @@ function EducationV2() {
         const [audioBlob, setAudioBlob] = useState(null);         
         const [audioUrl, setAudioUrl] = useState(null);
         const [compareData, setCompareData] = useState(null);
-        const [similarity, setSimilarity] = useState(0);
         const [isAudioPlay, setIsAudioPlay] = useState(false);
         const [viet,setViet] = useState("");
         const [korean,setKorean] = useState("");

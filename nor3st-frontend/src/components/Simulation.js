@@ -9,11 +9,9 @@ function Simulation (){
     const location = useLocation();
     const [videoStatus,setVideoStatus] = useState(true);
     let number = 0;
-    console.log(location);
     if(location.state!= null || location.state != undefined){
         number =  location.state.progress*10
     }
-    console.log(number);
     const [menth3,setMenth3] = useState("CheatSheets");
     const [menth4,setMenth4] = useState("LeetCode's Interview Crash Course");
     const [testimg,setTestimg] = useState(imgA);
@@ -52,7 +50,7 @@ function Simulation (){
                     <div className="SimulationMain">
                         <div className="testimg">
                             <div>
-                            <video autoplay onClick={clickHandler}>
+                            <video autoPlay onClick={clickHandler}>
                                 <source src={simulationguides} type="video/mp4" />
                             </video>
                             </div>

@@ -1,5 +1,6 @@
 import "../css/SimulationLevel.css"
 import { useEffect, useState } from "react"
+import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 import { useNavigate } from "react-router-dom";
 import stoplevel from "../img/stoplevel.png"
 import recordlevel from "../img/recordlevel.png"
@@ -16,58 +17,140 @@ import backgroundImage10 from "../img/simulNum10.png"
 import sound1 from "../data/voice1.mp3";
 import sound2 from "../data/voice2.mp3";
 import sound3 from "../data/voice3.mp3";
+import { serverIp } from "../apis/IPconfig";
+import Cookies from 'js-cookie';
+
 function SimulationLevel (){
-    const [number,setNumber] =useState(8);
-    const [recordCnt,setRecordCnt] = useState(0);
+    const  { 
+        startRecording , 
+        stopRecording , 
+        togglePauseResume , 
+        recordingBlob , 
+        isRecording , 
+        isPaused , 
+        recordingTime , 
+        mediaRecorder } = useAudioRecorder ( ) ;
+    const [blob, setBlob] = useState();
     const navigate = useNavigate();
-    const [btnChange,setBtnChange] = useState(true);
-    const backgroundImage = [backgroundImage1, backgroundImage2, backgroundImage3, backgroundImage4, backgroundImage5, backgroundImage6
+    const backgroundImage = [backgroundImage2, backgroundImage3, backgroundImage4, backgroundImage5, backgroundImage6
     ,backgroundImage7,backgroundImage8,backgroundImage9,backgroundImage10]
-    const [voiceCnt, setVoiceCnt] = useState(0);
+   
+    const [isAudioPlay, setIsAudioPlay] = useState(false)
+    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStepScore, setCurrentStepScore ] = useState(0)
+    const [totalGrade, setTotalGrade ] = useState(0);
+    const [questions,] = useState(["깃 충돌을 해결하는데 어떤 전략을 사용하나요? ", "깃으로 코드를 관리하면서, 버전을 효과적으로 관리할 수 있나요", "협업도구로는 주로 어떤 것을 사용하나요"])
+    const [iscompleted, setIsCompleted] = useState(false)
     const voice = [
         [sound1],
         [sound2],
         [sound3]
     ]
-    const skipHandler = () =>{
-        if(number >= 10){
-            alert("테스트가 종료 되었습니다");
-            navigate("../simulation", { state : {
-                progress : number
-            }})
+
+    const skipHandler = (e) =>{
+        if(currentStep + 2 >  voice.length){
+            setTimeout(()=>{
+                if(iscompleted){
+                    alert(`테스트가 종료 되었습니다.`);
+                    saveScore();
+                    navigate("../simulation", { state : {
+                        progress : currentStep
+                    }})
+                }
+            }, 1000)
+            
         }else{
-            setNumber(number+1);
-            setVoiceCnt(voiceCnt+1)
+            setTimeout(()=>{
+                setCurrentStep(currentStep+1);
+            }, 1000)
         }
-        setBtnChange(true);
-        console.log(backgroundImage[number-1])
-        console.log(recordlevel);
         document.getElementsByClassName("bgAI")[0].style.backgroundImage = "url('"+recordlevel+"')";
         document.getElementsByClassName("bgAI")[0].style.height = "88%";
-        setRecordCnt(0);
+
+    }
+
+    useEffect(()=>{
+        document.getElementsByClassName("sm_level_bg")[0].style.backgroundImage = "url('"+backgroundImage[currentStep]+"')";
+    },[currentStep])
+    
+    const audioPlay = () => {
+        if (!isAudioPlay) {
+            setIsAudioPlay(true);
+
+            const audio = new Audio(voice[currentStep]);
+            audio.play();
+
+            audio.onended = () => {
+                setIsAudioPlay(false);
+            };
+        }
+    };
+
+    const saveScore = () => {
+        const score = Math.floor(totalGrade * 100 / voice.length)
+        Cookies.set("simulation_total_score", score )
+    }
+    const setScore = async () =>{
+        try {
+            const isPassed = await getScore();
+            if(isPassed){
+                setTotalGrade(totalGrade + 1);
+            }
+        } catch (error) {
+            console.error("Error while getting score:", error);
+        }finally{
+            setIsCompleted(true)
+        }
+
     }
     useEffect(()=>{
-        document.getElementsByClassName("sm_level_bg")[0].style.backgroundImage = "url('"+backgroundImage[number-1]+"')";
-    },[number])
-    const audioPlay = () =>{
-        const audio = new Audio(voice[voiceCnt])
-        audio.play();
+    },[totalGrade, setTotalGrade, iscompleted, setIsCompleted])
+    
+
+    const getScore = async () =>{
+        if(recordingBlob){
+            const formData = new FormData();
+            const recordedBlob = new Blob([recordingBlob], { type: 'audio/mp3' })
+            formData.append("voice", recordedBlob, "simulation_voice.mp3")
+            formData.append("question", questions[currentStep])
+            console.log(recordedBlob)
+            setIsCompleted(false)
+            const getScoreFromAIServer = await fetch(`${serverIp}/simulation/question_text`,
+            {
+                method: 'POST',
+                body: formData
+            })
+
+            if (getScoreFromAIServer.ok) {
+                const jsonResponse = await getScoreFromAIServer.json();
+                return jsonResponse["answer"]
+            } else {
+                console.error('Failed to fetch data from the server:', getScoreFromAIServer.status);
+            }
+
+        }
     }
+    useEffect(()=>{
+        setBlob(recordingBlob);
+        if(!recordingBlob){
+            return
+        }
+        if(stopRecording){
+            setScore()
+        }
+    }, [recordingBlob])
     
-    
-    const recordingStart = () =>{
-        if(btnChange){
+    const recordingStart = (e) =>{
+        if(!isRecording){
+            startRecording(e)
             document.getElementsByClassName("bgAI")[0].style.backgroundImage = "url('"+stoplevel+"')";
             document.getElementsByClassName("bgAI")[0].style.height = "83%";
+            
         }else{
+            stopRecording(e)
             document.getElementsByClassName("bgAI")[0].style.backgroundImage = "url('"+recordlevel+"')";
             document.getElementsByClassName("bgAI")[0].style.height = "88%";
-        }
-        if(recordCnt >0){
-            skipHandler();
-        }else{
-        setRecordCnt(recordCnt+1);
-        setBtnChange(!btnChange)
+            skipHandler(e)
         }
     }
     return (
@@ -81,7 +164,7 @@ function SimulationLevel (){
                             <li onClick={recordingStart} className="bgAI"></li>
                             <li onClick={skipHandler}></li>
                         </ul>
-                        <p> {number} / 10</p>
+                        <p> {currentStep + 1} / {voice.length}</p>
                     </div>
                 </div>
             </div>
