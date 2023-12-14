@@ -49,6 +49,10 @@ function EducationV2() {
         const init = () => {
             const questions = getQuestions()
             const gaugeInit = Number(100 / questions.length);
+            setCurrentStep(0)
+            setTotalGrade(0)
+            setCurrentStepScore(0)
+            setBlob(null)
             setGaugeUnit(gaugeInit);
             setGradeUnit(gaugeInit); //gauge 와 동일하게 증가해야함
             setCurrentGauge(gaugeInit);
@@ -66,10 +70,13 @@ function EducationV2() {
         }
 
         const nextButton = (e) => {
-            if(currentGauge < maxGauge && currentStep < allQuestion.length - 1){
-                setCurrentGauge(currentGauge + gaugeUnit);
-                setCurrentStep(currentStep + 1)
+            if(currentGauge < maxGauge && currentStep < allQuestion.length -1){
+                setCurrentGauge((prevGauge) => prevGauge + gaugeUnit);
+                setCurrentStep((prevStep) => prevStep + 1);
+                setCurrentStepScore(0)
+                setBlob(null)
             }else{
+                saveTotalScore();
                 window.location.href = "/profile"
             }
         }
@@ -85,7 +92,6 @@ function EducationV2() {
                 const response = await fetch(`${filepath}`);
                 // Convert the response to ArrayBuffer
                 const musicArrayBuffer = await response.arrayBuffer();
-                console.log(musicArrayBuffer)
                 // Create a Blob from the ArrayBuffer
                 const musicBlob = new Blob([musicArrayBuffer], { type: 'audio/mp3' });
                 return musicBlob;
@@ -147,12 +153,18 @@ function EducationV2() {
         useEffect(() => {
             setBlob(recordingBlob);
             // compareBlobs();
-            getPronounce();
             if ( ! recordingBlob ){
                 
                 return  
-            } ;
-        },[ recordingBlob ])
+            }
+            if(stopRecording){
+                setScore()
+            }
+        },[ recordingBlob])
+
+        useEffect(()=>{
+            setTotalGrade(totalGrade + currentStepScore)
+        },[currentStepScore, setTotalGrade])
 
     const getPronounce = async () =>{
         if (recordingBlob) {
@@ -167,7 +179,7 @@ function EducationV2() {
                                     })
             if (getScoreFromAIServer.ok) {
                 const jsonResponse = await getScoreFromAIServer.json();
-                console.log(jsonResponse);
+                return jsonResponse
             } else {
                 console.error('Failed to fetch data from the server:', getScoreFromAIServer.status);
             }
@@ -175,8 +187,37 @@ function EducationV2() {
         }
     }
 
-    const saveTotalScore = () =>{
+    const setScore = async () => {
+        let score = 100
 
+        const pronounced = await getPronounce()
+
+        if (pronounced && pronounced.answer) { 
+            const answer = pronounced.answer
+            let korean_list = korean.split(" ");
+            console.log(pronounced.answer)
+            for (let i = 0; i < korean_list.length; i++) {
+                if (!answer.includes(korean_list[i])) {
+                    score -= 10
+                }
+            }
+            if(score < 0){
+                score = 0
+            }
+            setCurrentStepScore(score)
+            setTotalGrade(totalGrade+currentStepScore)
+        }
+        else{
+           score = 0
+           setCurrentStepScore(score)
+           setTotalGrade(totalGrade+currentStepScore)
+        }
+        return score
+    }
+
+    const saveTotalScore = () =>{
+        const totalSpeakingGrade = Number(totalGrade/allQuestion.length)
+        Cookies.set("speaking_total_score", totalSpeakingGrade )
     }
 
 
@@ -206,7 +247,7 @@ function EducationV2() {
                                 <li>
                                     <ul>
                                         <li><div className='gauge' style={{width : currentGauge+"%" }}></div></li>
-                                        <li>{/*<button onClick={prevButton}>prev</button>*/}<button onClick={nextButton}>next</button></li>
+                                        <li>{/*<button onClick={prevButton}>prev</button>*/}<button className='nextButton' onClick={nextButton}>next</button></li>
                                     </ul>
                                 </li>
                             </ul>
