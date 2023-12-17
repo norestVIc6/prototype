@@ -1,33 +1,63 @@
 {
     "questions": [{
         "question_id": 1,
-        "speaking_sentence": "MVC 모델이 무엇인지 설명해주세요.",
-        "viet" :"Hãy giải thích mô hình MVC là gì.",
+        "speaking_sentence": "안녕하세요. 좋은 아침입니다.",
+        "viet" :"Xin chào. Chào buổi sáng",
         "file_path":"/voice_data/1.mp3"
     },
     {
         "question_id": 2,
-        "speaking_sentence": "이 오류를 수정하는 건 생각보다 시간이 오래 걸립니다.",
-        "viet" :"Việc sửa lỗi mất nhiều thời gian hơn bạn nghĩ.",
+        "speaking_sentence": "주말 잘 보내셨어요?",
+        "viet" :"bạn đã có một cuối tuần vui vẻ chứ?",
         "file_path":"/voice_data/2.mp3"
     },
     {
         "question_id": 3,
-        "speaking_sentence": "간단해보이는 기능이지만, 생각보다 코드를 많이 수정해야하는 작업이예요.",
-        "viet" :"Đó là một chức năng có vẻ đơn giản nhưng nó đòi hỏi phải sửa đổi mã nhiều hơn bạn nghĩ.",
+        "speaking_sentence": "반갑습니다",
+        "viet" :"Rất vui được gặp bạn",
         "file_path":"/voice_data/3.mp3"
     },
     {
         "question_id": 4,
-        "speaking_sentence": "기획안을 보면 이 버튼은 한 가지 기능만 있는게 아니라, 두 가지 기능이 중복되어있어요.",
-        "viet" :"Nhìn vào sơ đồ, nút này không chỉ có một chức năng mà có hai chức năng chồng lên nhau.",
+        "speaking_sentence": "식사하셨나요?",
+        "viet" :"Bạn đã ăn chưa?",
         "file_path":"/voice_data/4.mp3"
     },
     {
         "question_id": 5,
-        "speaking_sentence" : "주어진 시간은 너무 짧아요. 중요한 핵심 기능만 남기고 나머지는 다음 버전으로 넘기는게 좋겠어요",
-        "viet" :"Thời gian đưa ra quá ngắn. Tôi nghĩ sẽ là một ý kiến ​​hay nếu chỉ để lại những tính năng cốt lõi quan trọng và chuyển phần còn lại sang phiên bản tiếp theo.",
+        "speaking_sentence" : "점심 식사 후에 뵙죠",
+        "viet" :"Hẹn gặp bạn sau bữa trưa",
         "file_path":"/voice_data/5.mp3"
+
+    },{
+        "question_id": 6,
+        "speaking_sentence": "오늘 회의 시작하겠습니다.",
+        "viet" :"Cuộc họp sẽ bắt đầu vào hôm nay",
+        "file_path":"/voice_data/6.mp3"
+    },
+    {
+        "question_id": 7,
+        "speaking_sentence": "오늘 회의 아젠다가 뭐죠?",
+        "viet" :"Chương trình nghị sự của cuộc họp hôm nay là gì?",
+        "file_path":"/voice_data/7.mp3"
+    },
+    {
+        "question_id": 8,
+        "speaking_sentence": "좋은 아이디어같아요",
+        "viet" :"Nghe có vẻ như một ý tưởng tốt",
+        "file_path":"/voice_data/8.mp3"
+    },
+    {
+        "question_id": 9,
+        "speaking_sentence": "죄송하지만 질문 하나 해도 될까요?",
+        "viet" :"Xin lỗi, nhưng tôi có thể hỏi bạn một câu được không?",
+        "file_path":"/voice_data/9.mp3"
+    },
+    {
+        "question_id": 10,
+        "speaking_sentence" : "이 다음 안건은 점심먹고 다시 하도록 하죠.",
+        "viet" :"Chúng ta sẽ quay lại mục tiếp theo sau bữa trưa.",
+        "file_path":"/voice_data/10.mp3"
 
     }]
 }

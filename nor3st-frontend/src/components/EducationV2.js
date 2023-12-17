@@ -69,6 +69,15 @@ function EducationV2() {
         }
 
         const nextButton = (e) => {
+
+            if(currentStepScore < 80){
+                alert('80점을 넘지 못했습니다!')
+            }else{
+                moveNextStep(e)
+            }
+        }
+
+        const moveNextStep = (e) => {
             if(currentGauge < maxGauge && currentStep < allQuestion.length -1){
                 setCurrentGauge((prevGauge) => prevGauge + gaugeUnit);
                 setCurrentStep((prevStep) => prevStep + 1);

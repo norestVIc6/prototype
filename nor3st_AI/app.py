@@ -9,6 +9,7 @@ from ai_models.lectureVoiceMaker import lectureVoiceMaker
 from ai_models.audioPreprocessing import match_target_amplitude, only_voice
 from ai_models.my_senior import MySenior
 from ai_models.simulation import Simulation 
+from ai_models.typecast import GetVoice
 import os
 from io import BytesIO
 from pydub import AudioSegment
@@ -237,3 +238,24 @@ def simulation_check_answer():
 
         with Simulation(request=request, voice_path=file_path) as result:
             return result
+        
+@app.route("/get_actor", methods=["GET"])
+def get_actor():
+    try:
+        result = ""
+        with GetVoice(url="actor", speech_text="") as id:
+            result = id
+        return jsonify({"result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+@app.route("/get_voice_mp3", methods=["POST"])
+def get_korean_speech():
+    
+    speech_text = request.form["korean"]
+    try:
+        with GetVoice(url="voice_file", speech_text=speech_text) as result:
+            return result
+    
+    except Exception as e:
+        return jsonify({"e~rror": str(e)})
