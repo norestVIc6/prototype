@@ -3,61 +3,61 @@
         "question_id": 1,
         "speaking_sentence": "안녕하세요. 좋은 아침입니다.",
         "viet" :"Xin chào. Chào buổi sáng",
-        "file_path":"/voice_data/1.mp3"
+        "file_path":"/voice_data/1.wav"
     },
     {
         "question_id": 2,
         "speaking_sentence": "주말 잘 보내셨어요?",
         "viet" :"bạn đã có một cuối tuần vui vẻ chứ?",
-        "file_path":"/voice_data/2.mp3"
+        "file_path":"/voice_data/2.wav"
     },
     {
         "question_id": 3,
         "speaking_sentence": "반갑습니다",
         "viet" :"Rất vui được gặp bạn",
-        "file_path":"/voice_data/3.mp3"
+        "file_path":"/voice_data/3.wav"
     },
     {
         "question_id": 4,
         "speaking_sentence": "식사하셨나요?",
         "viet" :"Bạn đã ăn chưa?",
-        "file_path":"/voice_data/4.mp3"
+        "file_path":"/voice_data/4.wav"
     },
     {
         "question_id": 5,
         "speaking_sentence" : "점심 식사 후에 뵙죠",
         "viet" :"Hẹn gặp bạn sau bữa trưa",
-        "file_path":"/voice_data/5.mp3"
+        "file_path":"/voice_data/5.wav"
 
     },{
         "question_id": 6,
         "speaking_sentence": "오늘 회의 시작하겠습니다.",
         "viet" :"Cuộc họp sẽ bắt đầu vào hôm nay",
-        "file_path":"/voice_data/6.mp3"
+        "file_path":"/voice_data/6.wav"
     },
     {
         "question_id": 7,
         "speaking_sentence": "오늘 회의 아젠다가 뭐죠?",
         "viet" :"Chương trình nghị sự của cuộc họp hôm nay là gì?",
-        "file_path":"/voice_data/7.mp3"
+        "file_path":"/voice_data/7.wav"
     },
     {
         "question_id": 8,
         "speaking_sentence": "좋은 아이디어같아요",
         "viet" :"Nghe có vẻ như một ý tưởng tốt",
-        "file_path":"/voice_data/8.mp3"
+        "file_path":"/voice_data/8.wav"
     },
     {
         "question_id": 9,
         "speaking_sentence": "죄송하지만 질문 하나 해도 될까요?",
         "viet" :"Xin lỗi, nhưng tôi có thể hỏi bạn một câu được không?",
-        "file_path":"/voice_data/9.mp3"
+        "file_path":"/voice_data/9.wav"
     },
     {
         "question_id": 10,
         "speaking_sentence" : "이 다음 안건은 점심먹고 다시 하도록 하죠.",
         "viet" :"Chúng ta sẽ quay lại mục tiếp theo sau bữa trưa.",
-        "file_path":"/voice_data/10.mp3"
+        "file_path":"/voice_data/10.wav"
 
     }]
 }

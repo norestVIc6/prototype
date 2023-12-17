@@ -70,8 +70,8 @@ function EducationV2() {
 
         const nextButton = (e) => {
 
-            if(currentStepScore < 80){
-                alert('80점을 넘지 못했습니다!')
+            if(currentStepScore < 60){
+                alert('60점을 넘지 못했습니다!')
             }else{
                 moveNextStep(e)
             }
@@ -98,10 +98,11 @@ function EducationV2() {
 
                 // Fetch the MP3 file
                 const response = await fetch(`${filepath}`);
+                console.log(response)
                 // Convert the response to ArrayBuffer
                 const musicArrayBuffer = await response.arrayBuffer();
                 // Create a Blob from the ArrayBuffer
-                const musicBlob = new Blob([musicArrayBuffer], { type: 'audio/mp3' });
+                const musicBlob = new Blob([musicArrayBuffer], { type: 'audio/wav' });
                 return musicBlob;
         }
 

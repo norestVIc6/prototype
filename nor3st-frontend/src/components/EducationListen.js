@@ -97,12 +97,23 @@ function EducationV2() {
         Cookies.set("listening_total_score", totalGrade)
     ]
     
-    const shuffleAnswer = () => {
-        let answers = allQuestion.map(e => e.viet);
+    const shuffleQuestionArray = (QuestionArr) => {
+        let answers = QuestionArr
         for (let i = answers.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [answers[i], answers[j]] = [answers[j], answers[i]];
-          }
+        }
+        return answers
+    }
+
+    const shuffleAnswer = () =>{
+
+        let NativeLanguageArray = allQuestion.filter(e => e.viet !== viet);
+        let wrongArray = NativeLanguageArray.map(e => e.viet);
+        let shuffledWrongArray = shuffleQuestionArray(wrongArray).slice(0, 4);
+        let WithCorrectAnswer = [...shuffledWrongArray, viet];
+        let answers = shuffleQuestionArray(WithCorrectAnswer)
+
         return answers
     }
 
