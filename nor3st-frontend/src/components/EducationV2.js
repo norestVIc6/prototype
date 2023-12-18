@@ -8,6 +8,7 @@ import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
 import { getMyDailyTasks,getMyDailyAudio, sendRecord } from '../apis/SolvedAPI';
 import getBlobDuration from 'get-blob-duration'
 import '../css/educationV2.css';
+import  {RotatingLines} from 'react-loader-spinner'
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import lecture from '../json_data/question.json'
 import { serverIp } from '../apis/IPconfig';
@@ -31,7 +32,7 @@ function EducationV2() {
         const [isAudioPlay, setIsAudioPlay] = useState(false);
         const [viet,setViet] = useState("");
         const [korean,setKorean] = useState("");
-
+        const [isLoading, setIsLoading] = useState(false)
         let audio;
         const [saveAudio,setSaveAudio] = useState(new Audio());
         const [currentStep, setCurrentStep] = useState(0);
@@ -47,7 +48,7 @@ function EducationV2() {
 
         const init = () => {
             const questions = getQuestions()
-            const gaugeInit = Number(100 / questions.length);
+            const gaugeInit = Math.floor(100 / questions.length);
             setCurrentStep(0)
             setTotalGrade(0)
             setCurrentStepScore(0)
@@ -106,7 +107,7 @@ function EducationV2() {
                 return musicBlob;
         }
 
-        const playBlob = async() => {
+        const playBlob = async(e) => {
             clearTimeout(timeout)
             if (audioBlob) {
                 const url = URL.createObjectURL(audioBlob);
@@ -175,12 +176,13 @@ function EducationV2() {
             setTotalGrade(totalGrade + currentStepScore)
         },[currentStepScore, setTotalGrade])
 
+
     const getPronounce = async () =>{
         if (recordingBlob) {
             const formData = new FormData();
             const recordedBlob = new Blob([recordingBlob], { type: 'audio/mp3' }); 
             formData.append("voice", recordedBlob, "voice");
-
+            setIsLoading(true)
             const getScoreFromAIServer = await fetch(`${serverIp}/get_pronounce`,
                                     {   
                                         method: 'POST',
@@ -188,6 +190,7 @@ function EducationV2() {
                                     })
             if (getScoreFromAIServer.ok) {
                 const jsonResponse = await getScoreFromAIServer.json();
+                setIsLoading(false)
                 return jsonResponse
             } else {
                 console.error('Failed to fetch data from the server:', getScoreFromAIServer.status);
@@ -295,12 +298,16 @@ function EducationV2() {
                                         <li>({viet})</li>
                                     </ul>
                                     <div className='btnAudio'>
-                                        {!isAudioPlay ? <button onClick={playBlob}>Start Playing</button> : <button onClick={playBlob}>Pause Playing</button>}
-                                        {!isRecording ? <button onClick={startRecording}>RECORDING</button> : <button onClick={stopRecording}>STOP</button>}
+                                        {!isAudioPlay ? <button onClick={playBlob} disabled={isLoading || isRecording}>Start Playing</button> : <button onClick={playBlob}>Pause Playing</button>}
+                                        {!isRecording ? <button onClick={startRecording} disabled={isLoading}>RECORDING</button> : <button onClick={stopRecording}>STOP</button>}
                                     </div>
                                 </div>
                             </div>
                             <div>
+                                <div className='loading' style={{ display: isLoading ? 'flex' : 'none' }}>
+                                    <div>Đang đánh giá cách phát âm</div>
+                                    <RotatingLines strokeColor="white" visible={isLoading} />
+                                </div>
                                 {isRecording &&  (
                                     <LiveAudioVisualizer
                                     mediaRecorder={mediaRecorder}
