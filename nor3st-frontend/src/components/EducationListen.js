@@ -29,7 +29,7 @@ function EducationV2() {
 
     const init = () => {
         const questions = getQuestions()
-        const gaugeInit = Number(100 / questions.length);
+        const gaugeInit = 10
         setGaugeUnit(gaugeInit);
         setGradeUnit(gaugeInit); //gauge 와 동일하게 증가해야함
         setCurrentGauge(gaugeInit);
@@ -59,10 +59,14 @@ function EducationV2() {
         // };
     },[currentStep])
 
+    useEffect(()=>{
+        saveScore()
+    },[totalGrade])
+
     // 문제 가져오기
     const getQuestions = () => {
-        const questions = JSON.parse(JSON.stringify(lecture))
-        return questions.questions
+        const questions = JSON.parse(JSON.stringify(lecture)).questions["2"]
+        return questions
     }
 
 
@@ -76,10 +80,14 @@ function EducationV2() {
 
     // 다음 버튼
     const delay_next_button_refresh = (e) =>{
+      setTimeout(()=>{
+      turnWhite(e)
+      }, 200)
       setTimeout(() => {
-          nextButton(e)
-          turnWhite(e)
-      }, 300); 
+        nextButton(e)  
+      }, 500); 
+      
+
     }
 
     const nextButton = (e) => {
@@ -87,15 +95,16 @@ function EducationV2() {
             setCurrentGauge(currentGauge + gaugeUnit);
             setCurrentStep(currentStep + 1)
         }else{
+                
             window.location.href = "/profile"
-            saveScore()
         }
     }
 
     //점수 저장
-    const saveScore = () => [
+    const saveScore = () => {
+        console.log("saveScore", totalGrade)
         Cookies.set("listening_total_score", totalGrade)
-    ]
+    }
     
     const shuffleQuestionArray = (QuestionArr) => {
         let answers = QuestionArr
@@ -128,7 +137,7 @@ function EducationV2() {
       console.log("checked")
       const correct = e.target.innerHTML.includes(viet);
       if (correct) {
-        setTotalGrade((prevTotalGrade) => prevTotalGrade + gradeUnit);
+        setTotalGrade(totalGrade + gradeUnit);
         turnBlue(e);
       } else {
         turnRed(e);

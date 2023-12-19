@@ -62,6 +62,11 @@ function EducationV2() {
             init()
         }, [])
 
+        useEffect(()=>{
+
+            saveTotalScore();
+        }, [totalGrade])
+        
         const prevButton = (e) => {
             if(currentGauge > 0){
                 setCurrentGauge(currentGauge - gaugeUnit);
@@ -85,14 +90,13 @@ function EducationV2() {
                 setCurrentStepScore(0)
                 setBlob(null)
             }else{
-                saveTotalScore();
                 window.location.href = "/profile"
             }
         }
 
 
         const getQuestions = () => {
-            const questions = JSON.parse(JSON.stringify(lecture)).questions;
+            const questions = JSON.parse(JSON.stringify(lecture)).questions["2"];
             return questions
         }
         const get_mp3_file_to_blob = async (filepath) =>{
@@ -228,7 +232,7 @@ function EducationV2() {
     }
 
     const saveTotalScore = () =>{
-        const totalSpeakingGrade = Number(totalGrade/allQuestion.length)
+        const totalSpeakingGrade = Math.floor(totalGrade/allQuestion.length)
         Cookies.set("speaking_total_score", totalSpeakingGrade )
     }
 

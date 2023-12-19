@@ -1,63 +1,130 @@
 {
-    "questions": [{
-        "question_id": 1,
-        "speaking_sentence": "안녕하세요. 좋은 아침입니다.",
-        "viet" :"Xin chào. Chào buổi sáng",
-        "file_path":"/voice_data/1.wav"
-    },
-    {
-        "question_id": 2,
-        "speaking_sentence": "주말 잘 보내셨어요?",
-        "viet" :"bạn đã có một cuối tuần vui vẻ chứ?",
-        "file_path":"/voice_data/2.wav"
-    },
-    {
-        "question_id": 3,
-        "speaking_sentence": "반갑습니다",
-        "viet" :"Rất vui được gặp bạn",
-        "file_path":"/voice_data/3.wav"
-    },
-    {
-        "question_id": 4,
-        "speaking_sentence": "식사하셨나요?",
-        "viet" :"Bạn đã ăn chưa?",
-        "file_path":"/voice_data/4.wav"
-    },
-    {
-        "question_id": 5,
-        "speaking_sentence" : "점심 식사 후에 뵙죠",
-        "viet" :"Hẹn gặp bạn sau bữa trưa",
-        "file_path":"/voice_data/5.wav"
+    "questions": {
+        "1":[{
+            "question_id": 1,
+            "speaking_sentence": "안녕하세요. 좋은 아침입니다.",
+            "viet" :"Xin chào. Chào buổi sáng",
+            "file_path":"/voice_data/DAY1/1.wav"
+        },
+        {
+            "question_id": 2,
+            "speaking_sentence": "주말 잘 보내셨어요?",
+            "viet" :"bạn đã có một cuối tuần vui vẻ chứ?",
+            "file_path":"/voice_data/DAY1/2.wav"
+        },
+        {
+            "question_id": 3,
+            "speaking_sentence": "반갑습니다",
+            "viet" :"Rất vui được gặp bạn",
+            "file_path":"/voice_data/DAY1/3.wav"
+        },
+        {
+            "question_id": 4,
+            "speaking_sentence": "식사하셨나요?",
+            "viet" :"Bạn đã ăn chưa?",
+            "file_path":"/voice_data/DAY1/4.wav"
+        },
+        {
+            "question_id": 5,
+            "speaking_sentence" : "점심 식사 후에 뵙죠",
+            "viet" :"Hẹn gặp bạn sau bữa trưa",
+            "file_path":"/voice_data/DAY1/5.wav"
 
-    },{
-        "question_id": 6,
-        "speaking_sentence": "오늘 회의 시작하겠습니다.",
-        "viet" :"Cuộc họp sẽ bắt đầu vào hôm nay",
-        "file_path":"/voice_data/6.wav"
-    },
-    {
-        "question_id": 7,
-        "speaking_sentence": "오늘 회의 아젠다가 뭐죠?",
-        "viet" :"Chương trình nghị sự của cuộc họp hôm nay là gì?",
-        "file_path":"/voice_data/7.wav"
-    },
-    {
-        "question_id": 8,
-        "speaking_sentence": "좋은 아이디어같아요",
-        "viet" :"Nghe có vẻ như một ý tưởng tốt",
-        "file_path":"/voice_data/8.wav"
-    },
-    {
-        "question_id": 9,
-        "speaking_sentence": "죄송하지만 질문 하나 해도 될까요?",
-        "viet" :"Xin lỗi, nhưng tôi có thể hỏi bạn một câu được không?",
-        "file_path":"/voice_data/9.wav"
-    },
-    {
-        "question_id": 10,
-        "speaking_sentence" : "이 다음 안건은 점심먹고 다시 하도록 하죠.",
-        "viet" :"Chúng ta sẽ quay lại mục tiếp theo sau bữa trưa.",
-        "file_path":"/voice_data/10.wav"
+        },{
+            "question_id": 6,
+            "speaking_sentence": "오늘 회의 시작하겠습니다.",
+            "viet" :"Cuộc họp sẽ bắt đầu vào hôm nay",
+            "file_path":"/voice_data/DAY1/6.wav"
+        },
+        {
+            "question_id": 7,
+            "speaking_sentence": "오늘 회의 아젠다가 뭐죠?",
+            "viet" :"Chương trình nghị sự của cuộc họp hôm nay là gì?",
+            "file_path":"/voice_data/DAY1/7.wav"
+        },
+        {
+            "question_id": 8,
+            "speaking_sentence": "좋은 아이디어같아요",
+            "viet" :"Nghe có vẻ như một ý tưởng tốt",
+            "file_path":"/voice_data/DAY1/8.wav"
+        },
+        {
+            "question_id": 9,
+            "speaking_sentence": "죄송하지만 질문 하나 해도 될까요?",
+            "viet" :"Xin lỗi, nhưng tôi có thể hỏi bạn một câu được không?",
+            "file_path":"/voice_data/DAY1/9.wav"
+        },
+        {
+            "question_id": 10,
+            "speaking_sentence" : "이 다음 안건은 점심먹고 다시 하도록 하죠.",
+            "viet" :"Chúng ta sẽ quay lại mục tiếp theo sau bữa trưa.",
+            "file_path":"/voice_data/DAY1/10.wav"
 
-    }]
+        }],
+        "2":[
+            {
+                "question_id": 1,
+                "speaking_sentence": "안녕하세요. 좋은 아침입니다.",
+                "viet" :"Xin chào. Chào buổi sáng",
+                "file_path":"/voice_data/DAY2/1.wav"
+            },
+            {
+                "question_id": 2,
+                "speaking_sentence": "주말 잘 보내셨어요?",
+                "viet" :"bạn đã có một cuối tuần vui vẻ chứ?",
+                "file_path":"/voice_data/DAY2/2.wav"
+            },
+            {
+                "question_id": 3,
+                "speaking_sentence": "반갑습니다",
+                "viet" :"Rất vui được gặp bạn",
+                "file_path":"/voice_data/DAY2/3.wav"
+            },
+            {
+                "question_id": 4,
+                "speaking_sentence": "식사하셨나요?",
+                "viet" :"Bạn đã ăn chưa?",
+                "file_path":"/voice_data/DAY2/4.wav"
+            },
+            {
+                "question_id": 5,
+                "speaking_sentence" : "점심 식사 후에 뵙죠",
+                "viet" :"Hẹn gặp bạn sau bữa trưa",
+                "file_path":"/voice_data/DAY2/5.wav"
+    
+            },{
+                "question_id": 6,
+                "speaking_sentence": "이번 프로젝트에 대해 어떤 아이디어가 있나요?",
+                "viet" :"Bạn có ý tưởng gì cho dự án này không?",
+                "file_path":"/voice_data/DAY2/6.wav"
+            },
+            {
+                "question_id": 7,
+                "speaking_sentence": "프로젝트 일정은 어떻게 되나요?",
+                "viet" :"Lịch trình dự án là gì?",
+                "file_path":"/voice_data/DAY2/7.wav"
+            },
+            {
+                "question_id": 8,
+                "speaking_sentence": "프로젝트 팀은 어떻게 구성되어 있나요?",
+                "viet" :"Nhóm dự án được cấu trúc như thế nào?",
+                "file_path":"/voice_data/DAY2/8.wav"
+            },
+            {
+                "question_id": 9,
+                "speaking_sentence": "제가 해야 할 작업은 무엇인가요?",
+                "viet" :"Tôi cần phải làm gì?",
+                "file_path":"/voice_data/DAY2/9.wav"
+            },
+            {
+                "question_id": 10,
+                "speaking_sentence" : "이 프로젝트에 연계 된 이전 작업이 있나요?",
+                "viet" :"Có công việc nào trước đây liên quan đến dự án này không?",
+                "file_path":"/voice_data/DAY2/10.wav"
+    
+            }
+
+
+        ]
+    }
 }
