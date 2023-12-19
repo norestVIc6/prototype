@@ -22,7 +22,8 @@ class Simulation:
             self.answer = result["answer"]
         
         self.question = request.form["question"]
-        template = """질문은 {question}이고 질문에 대한 대답으로  {user_answer}가 맥락과, 문법, 어휘가 맞으면 T, 틀리면 F로 한 글자 만으로 말해줘."""
+        self.model_answer = request.form["model_answer"]
+        template = """질문은 {question}이고 질문에 대한 대답으로  {user_answer}가 {model_answer}와 유사하고, 맥락과, 문법, 어휘가 맞으면 T, 틀리면 F로 한 글자 만으로 말해줘."""
         self.system_message_prompt = SystemMessagePromptTemplate.from_template(template)
         
         self.result = {}
@@ -44,7 +45,7 @@ class Simulation:
         
         answer =  self.chat(
             prompt.format_prompt(
-                question=self.question, user_answer=self.answer
+                question=self.question, user_answer=self.answer, model_answer = self.model_answer
             ).to_messages()
         )
 

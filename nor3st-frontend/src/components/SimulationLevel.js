@@ -1,7 +1,7 @@
 import "../css/SimulationLevel.css"
 import { useEffect, useState } from "react"
 import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import stoplevel from "../img/stoplevel.png"
 import recordlevel from "../img/recordlevel.png"
 import backgroundImage1 from "../img/simulNum1.png"
@@ -14,9 +14,8 @@ import backgroundImage7 from "../img/simulNum7.png"
 import backgroundImage8 from "../img/simulNum8.png"
 import backgroundImage9 from "../img/simulNum9.png"
 import backgroundImage10 from "../img/simulNum10.png"
-import sound1 from "../data/voice1.mp3";
-import sound2 from "../data/voice2.mp3";
-import sound3 from "../data/voice3.mp3";
+import simulation from "../json_data/simulation.json"
+
 import { serverIp } from "../apis/IPconfig";
 import Cookies from 'js-cookie';
 
@@ -37,22 +36,51 @@ function SimulationLevel (){
    
     const [isAudioPlay, setIsAudioPlay] = useState(false)
     const [currentStep, setCurrentStep] = useState(0);
-    const [currentStepScore, setCurrentStepScore ] = useState(0)
+    const [audioList, setAudioList] = useState([])
     const [totalGrade, setTotalGrade ] = useState(0);
-    const [questions,] = useState(["깃 충돌을 해결하는데 어떤 전략을 사용하나요? ", "깃으로 코드를 관리하면서, 버전을 효과적으로 관리할 수 있나요", "협업도구로는 주로 어떤 것을 사용하나요"])
+    const [questions, setQuestions] = useState([])
+    const [modelAnswers, setModelAnswers ] = useState([])
     const [iscompleted, setIsCompleted] = useState(false)
-    const voice = [
-        [sound1],
-        [sound2],
-        [sound3]
-    ]
+
+    const init = () =>{
+        const question_list = getQuestions()
+        const model_answer_list = getModelAnswer()
+        const audio_path_list = getAudioPaths()
+        setQuestions([...question_list])
+        setModelAnswers([...model_answer_list])
+        setAudioList([...audio_path_list])
+        setCurrentStep(0)
+        setTotalGrade(0)
+    }
+
+    useEffect(()=>{
+        init()
+    }, [])
+
+    const getQuestions = () =>{
+        const simul = JSON.parse(JSON.stringify(simulation)).simulation
+        const simul_question_list = simul.map(e => e.speaking_sentence)
+        return simul_question_list
+
+    }
+
+    const getModelAnswer = () =>{
+        const simul = JSON.parse(JSON.stringify(simulation)).simulation
+        const model_answer_list = simul.map(e => e.model_answer)
+        return model_answer_list
+    }
+
+    const getAudioPaths = () =>{
+        const simul = JSON.parse(JSON.stringify(simulation)).simulation
+        const paths = simul.map(e => e.file_path)
+        return paths
+    }
 
     const skipHandler = (e) =>{
-        if(currentStep + 2 >  voice.length){
+        if(currentStep + 2 >  audioList.length){
             setTimeout(()=>{
                 if(iscompleted){
                     alert(`테스트가 종료 되었습니다.`);
-                    saveScore();
                     navigate("../simulation", { state : {
                         progress : currentStep
                     }})
@@ -77,7 +105,7 @@ function SimulationLevel (){
         if (!isAudioPlay) {
             setIsAudioPlay(true);
 
-            const audio = new Audio(voice[currentStep]);
+            const audio = new Audio(audioList[currentStep]);
             audio.play();
 
             audio.onended = () => {
@@ -87,7 +115,8 @@ function SimulationLevel (){
     };
 
     const saveScore = () => {
-        const score = Math.floor(totalGrade * 100 / voice.length)
+        console.log(totalGrade)
+        const score = Math.floor(totalGrade * 100 / audioList.length)
         Cookies.set("simulation_total_score", score )
     }
     const setScore = async () =>{
@@ -104,6 +133,7 @@ function SimulationLevel (){
 
     }
     useEffect(()=>{
+        saveScore()
     },[totalGrade, setTotalGrade, iscompleted, setIsCompleted])
     
 
@@ -112,6 +142,7 @@ function SimulationLevel (){
             const formData = new FormData();
             const recordedBlob = new Blob([recordingBlob], { type: 'audio/mp3' })
             formData.append("voice", recordedBlob, "simulation_voice.mp3")
+            formData.append("model_answer", modelAnswers[currentStep])
             formData.append("question", questions[currentStep])
             console.log(recordedBlob)
             setIsCompleted(false)
@@ -164,7 +195,7 @@ function SimulationLevel (){
                             <li onClick={recordingStart} className="bgAI"></li>
                             <li onClick={skipHandler}></li>
                         </ul>
-                        <p> {currentStep + 1} / {voice.length}</p>
+                        <p> {currentStep + 1} / {audioList.length}</p>
                     </div>
                 </div>
             </div>
