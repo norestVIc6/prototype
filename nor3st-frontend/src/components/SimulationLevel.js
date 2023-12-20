@@ -112,7 +112,6 @@ function SimulationLevel (){
     };
 
     const saveScore = () => {
-        console.log(totalGrade)
         const score = Math.floor(totalGrade * 100 / audioList.length)
         Cookies.set("simulation_total_score", score )
     }
@@ -141,7 +140,6 @@ function SimulationLevel (){
             formData.append("voice", recordedBlob, "simulation_voice.mp3")
             formData.append("model_answer", modelAnswers[currentStep])
             formData.append("question", questions[currentStep])
-            console.log(recordedBlob)
             setIsCompleted(false)
             const getScoreFromAIServer = await fetch(`${serverIp}/simulation/question_text`,
             {

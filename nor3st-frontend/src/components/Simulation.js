@@ -28,7 +28,7 @@ function Simulation (){
     useEffect(()=>{
         const question_list = getSimulationQuestion
         setQuestion(question_list)
-        const simulation_score = Cookies.get("simulation_total_score") || 0
+        const simulation_score = Number(Cookies.get("simulation_total_score")) || 0
         setTotalScore(simulation_score)
     }, [])
 
@@ -123,7 +123,7 @@ function Simulation (){
                                 </ul>
                             </div>
                             <div className="levelprogress">
-                                <p>{(totalScore || 0 )+" %"}</p>
+                                <p>{(totalScore)+" %"}</p>
                             </div>
                         </div>
                     </div>
