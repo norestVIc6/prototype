@@ -1,20 +1,37 @@
 import "../css/Simulation.css"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import imgA from "../img/simul_selet1.png"
 import imgB from "../img/simul_selet2.png"
 import imgC from "../img/simul_selet3.png"
 import simulationguides from "../img/simulation_guide.mp4";
+import simulation from "../json_data/simulation.json"
+import Cookies from 'js-cookie';
+
 function Simulation (){
     const location = useLocation();
     const [videoStatus,setVideoStatus] = useState(true);
-    let number = 0;
-    if(location.state!= null || location.state != undefined){
-        number =  location.state.progress*10
-    }
+    const [totalScore, setTotalScore] = useState(0)
     const [menth3,setMenth3] = useState("CheatSheets");
     const [menth4,setMenth4] = useState("LeetCode's Interview Crash Course");
     const [testimg,setTestimg] = useState(imgA);
+    const audioRef = useRef(null)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [questions, setQuestion ] =useState([])
+
+
+    const getSimulationQuestion = () =>{
+        const simul = JSON.parse(JSON.stringify(simulation)).simulation
+        return simul
+    }
+
+    useEffect(()=>{
+        const question_list = getSimulationQuestion
+        setQuestion(question_list)
+        const simulation_score = Cookies.get("simulation_total_score") || 0
+        setTotalScore(simulation_score)
+    }, [])
+
     const onChangeLevel = (e) => {
         const a = e.currentTarget.className;
         if(a.includes("level_one")){
@@ -41,6 +58,26 @@ function Simulation (){
             event.play();
         }
         setVideoStatus(!videoStatus);        
+    }
+
+    const playSample = () =>{
+        const currentAudio = audioRef.current;
+
+        if(!isPlaying){
+            if(currentAudio && !isPlaying){
+                currentAudio.src = questions[0].file_path
+                currentAudio.play()
+            }
+            setIsPlaying(true);
+        }else{
+            if(currentAudio){
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            setIsPlaying(false)
+        }
+        
     }
     return (
         <>
@@ -69,22 +106,24 @@ function Simulation (){
                             </div>
                             </Link>
                             <div className="playlevel">
-                                <div className="playbtn"></div>
+                                <div className="playbtn" onClick={playSample}>
+                                    <audio ref={audioRef}/>
+                                </div>
                             </div>
                             <div className="level_content">
                                 <ul>
                                     <li>
                                         <strong>1</strong>
-                                        <p>chapter</p>
+                                        <p>Level</p>
                                     </li>
                                     <li>
-                                        <strong>3</strong>
+                                        <strong>{questions.length}</strong>
                                         <p>item</p>
                                     </li>
                                 </ul>
                             </div>
                             <div className="levelprogress">
-                                <p>{number > 0 ? number+" %": "0 %"}</p>
+                                <p>{(totalScore || 0 )+" %"}</p>
                             </div>
                         </div>
                     </div>

@@ -59,9 +59,9 @@ function Profile() {
         const speaking_score = Cookies.get("speaking_total_score") || 0
         const simulation_score = Cookies.get("simulation_total_score") || 0
 
-        setListeningScore(Number(listen_score))
-        setSpeakingScore(Number(speaking_score))
-        setSimulationScore(Number(simulation_score))
+        setListeningScore(Number(listen_score) || 0)
+        setSpeakingScore(Number(speaking_score) || 0)
+        setSimulationScore(Number(simulation_score) || 0)
     }
 
     return (

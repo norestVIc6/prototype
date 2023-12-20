@@ -31,7 +31,7 @@ function SimulationLevel (){
         mediaRecorder } = useAudioRecorder ( ) ;
     const [blob, setBlob] = useState();
     const navigate = useNavigate();
-    const backgroundImage = [backgroundImage2, backgroundImage3, backgroundImage4, backgroundImage5, backgroundImage6
+    const backgroundImage = [backgroundImage1, backgroundImage2, backgroundImage3, backgroundImage4, backgroundImage5, backgroundImage6
     ,backgroundImage7,backgroundImage8,backgroundImage9,backgroundImage10]
    
     const [isAudioPlay, setIsAudioPlay] = useState(false)
@@ -78,19 +78,16 @@ function SimulationLevel (){
 
     const skipHandler = (e) =>{
         if(currentStep + 2 >  audioList.length){
-            setTimeout(()=>{
-                if(iscompleted){
-                    alert(`테스트가 종료 되었습니다.`);
-                    navigate("../simulation", { state : {
-                        progress : currentStep
-                    }})
-                }
-            }, 1000)
-            
+            if(iscompleted){
+                alert(`테스트가 종료 되었습니다.`);
+                navigate("../simulation", { state : {
+                    progress : currentStep
+                }})
+            }
         }else{
             setTimeout(()=>{
                 setCurrentStep(currentStep+1);
-            }, 1000)
+            }, 100)
         }
         document.getElementsByClassName("bgAI")[0].style.backgroundImage = "url('"+recordlevel+"')";
         document.getElementsByClassName("bgAI")[0].style.height = "88%";
