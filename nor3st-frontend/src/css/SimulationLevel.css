@@ -18,7 +18,8 @@
 .sm_level_bg{
     /* background-image: url("../img/simulNum1.png"); */
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto,60%;
+    background-position: center;
     width: 90%;
     height: 80%;
 }

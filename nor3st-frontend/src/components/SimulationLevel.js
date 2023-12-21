@@ -95,7 +95,8 @@ function SimulationLevel (){
     }
 
     useEffect(()=>{
-        document.getElementsByClassName("sm_level_bg")[0].style.backgroundImage = "url('"+backgroundImage[currentStep]+"')";
+        const level_bg = document.getElementsByClassName("sm_level_bg")[0];
+        level_bg.style.backgroundImage = "url('" + backgroundImage[currentStep] + "')";
     },[currentStep])
     
     const audioPlay = () => {
