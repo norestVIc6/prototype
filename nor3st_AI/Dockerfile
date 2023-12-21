@@ -15,4 +15,4 @@ WORKDIR /app
 COPY . .
 
 # Install Python packages from requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install -r --no-cache-dir requirements.txt
